@@ -1,7 +1,3 @@
-// ========================================
-// ✏️ CREATOR SECTION (EDIT QUESTIONS HERE)
-// ========================================
-
 const examData = {
     "Mathematics": {
         "Algebra": [
@@ -12,7 +8,6 @@ const examData = {
             }
         ]
     },
-
     "Science": {
         "Physics": [
             {
@@ -23,10 +18,6 @@ const examData = {
         ]
     }
 };
-
-// ========================================
-// 🚫 DO NOT EDIT BELOW
-// ========================================
 
 const subjectSelect = document.getElementById("subjectSelect");
 const topicSelect = document.getElementById("topicSelect");
