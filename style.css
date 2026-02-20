@@ -28,10 +28,8 @@ body{
 .app-header h1{
   font-size:2rem;
   letter-spacing:.5px;
-  background:linear-gradient(90deg,#a5b4fc,#22d3ee);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+  color: #f8fafc; 
+  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
 
 /* USER TOP RIGHT */
 .user-display{
