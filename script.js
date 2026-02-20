@@ -1,73 +1,79 @@
-// ===== EDIT THIS DATA ONLY =====
+// ===== EDIT YOUR SUBJECTS, TOPICS, QUESTIONS HERE =====
 const data = {
-  "Mathematics": {
+  "Math": {
     "Algebra": [
-      "Solve: 2x + 5 = 17",
-      "Factorise: x^2 + 5x + 6"
+      { q: "Solve: 2x + 3 = 7", a: "x = 2" },
+      { q: "Value of x: x/2 = 5", a: "x = 10" }
     ],
     "Mensuration": [
-      "Find area of circle radius 7 cm"
+      { q: "Area of square with side 4?", a: "16" }
     ]
   },
 
   "Science": {
     "Physics": [
-      "Define velocity"
+      { q: "Unit of force?", a: "Newton" }
+    ],
+    "Biology": [
+      { q: "Basic unit of life?", a: "Cell" }
     ]
   }
 };
-// ===============================
+// ======================================================
 
 const subjectSelect = document.getElementById("subjectSelect");
 const topicSelect = document.getElementById("topicSelect");
-const questionArea = document.getElementById("questionArea");
+const container = document.getElementById("questionsContainer");
 
-function populateSubjects() {
+function loadSubjects() {
   subjectSelect.innerHTML = "";
-  Object.keys(data).forEach(subject => {
-    const opt = document.createElement("option");
+  for (let subject in data) {
+    let opt = document.createElement("option");
     opt.value = subject;
     opt.textContent = subject;
     subjectSelect.appendChild(opt);
-  });
-  populateTopics();
+  }
+  loadTopics();
 }
 
-function populateTopics() {
-  const subject = subjectSelect.value;
+function loadTopics() {
   topicSelect.innerHTML = "";
-
-  Object.keys(data[subject]).forEach(topic => {
-    const opt = document.createElement("option");
+  let subject = subjectSelect.value;
+  for (let topic in data[subject]) {
+    let opt = document.createElement("option");
     opt.value = topic;
     opt.textContent = topic;
     topicSelect.appendChild(opt);
-  });
-
-  showQuestions();
+  }
+  loadQuestions();
 }
 
-function showQuestions() {
-  const subject = subjectSelect.value;
-  const topic = topicSelect.value;
-  const questions = data[subject][topic];
+function loadQuestions() {
+  container.innerHTML = "";
+  let subject = subjectSelect.value;
+  let topic = topicSelect.value;
+  let questions = data[subject][topic];
 
-  questionArea.innerHTML = "";
-
-  questions.forEach((q, i) => {
-    const card = document.createElement("div");
-    card.className = "question-card";
+  questions.forEach((item, index) => {
+    let card = document.createElement("div");
+    card.className = "card";
 
     card.innerHTML = `
-      <div class="question-number">Question ${i + 1}</div>
-      <div>${q}</div>
+      <div class="question">${index + 1}. ${item.q}</div>
+      <button onclick="toggleAnswer(${index})">Show Answer</button>
+      <div class="answer" id="ans${index}">${item.a}</div>
     `;
 
-    questionArea.appendChild(card);
+    container.appendChild(card);
   });
 }
 
-subjectSelect.addEventListener("change", populateTopics);
-topicSelect.addEventListener("change", showQuestions);
+function toggleAnswer(i) {
+  let ans = document.getElementById("ans" + i);
+  ans.style.display = ans.style.display === "block" ? "none" : "block";
+}
 
-populateSubjects();
+subjectSelect.addEventListener("change", loadTopics);
+topicSelect.addEventListener("change", loadQuestions);
+
+loadSubjects();
