@@ -43,17 +43,10 @@ select {
     border: 1px solid #3a4154;
     border-radius: 8px;
     font-size: 14px;
-    outline: none;
-    transition: 0.2s;
 }
 
 select:disabled {
     opacity: 0.5;
-}
-
-select:focus {
-    border-color: #6200ee;
-    box-shadow: 0 0 0 2px rgba(98,0,238,0.25);
 }
 
 .questions {
@@ -67,10 +60,6 @@ select:focus {
     padding: 18px;
     border-radius: 10px;
     border-left: 4px solid #6200ee;
-}
-
-.question-box h3 {
-    margin: 0 0 10px 0;
 }
 
 .options {
