@@ -1,24 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Revision</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revision Practice</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<header>
-  <h1>📚 Exam Revision Practice</h1>
+<header class="app-header">
+
+  <div class="user-box">
+    <input type="text" id="usernameInput" placeholder="Enter name" />
+    <button id="saveUser">Sign In</button>
+    <span id="welcomeUser"></span>
+  </div>
+
+  <h1>📘 Revision Practice</h1>
   <p>Select subject → topic → practice questions</p>
 </header>
 
-<div class="controls">
-  <select id="subjectSelect"></select>
-  <select id="topicSelect"></select>
-</div>
+<main class="container">
 
-<div id="questionsContainer"></div>
+  <section class="controls">
+    <div class="select-group">
+      <label>Subject</label>
+      <select id="subjectSelect"></select>
+    </div>
+
+    <div class="select-group">
+      <label>Topic</label>
+      <select id="topicSelect"></select>
+    </div>
+  </section>
+
+  <section id="questionArea" class="question-area">
+    <p class="placeholder">Choose a subject and topic</p>
+  </section>
+
+</main>
+
+<footer class="app-footer">
+  Made for exam revision ✨
+</footer>
 
 <script src="script.js"></script>
 </body>
