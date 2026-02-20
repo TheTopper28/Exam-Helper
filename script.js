@@ -1,84 +1,107 @@
+// ===== EDIT YOUR SUBJECTS / QUESTIONS / ANSWERS HERE =====
 const data = {
-  Math: {
+  Mathematics: {
     Algebra: [
-      { q: "Solve: 2x + 3 = 7", a: "x = 2" },
-      { q: "Value of x: x/2 = 5", a: "x = 10" }
+      { q: "Solve: 2x + 5 = 17", a: "x = 6" },
+      { q: "Factorise: x² + 5x + 6", a: "(x+2)(x+3)" }
     ],
     Mensuration: [
-      { q: "Area of square with side 4?", a: "16" }
+      { q: "Area of circle radius 7 cm", a: "154 cm²" }
     ]
   },
 
   Science: {
     Physics: [
-      { q: "Unit of force?", a: "Newton" }
-    ],
-    Biology: [
-      { q: "Basic unit of life?", a: "Cell" }
+      { q: "Define velocity", a: "Speed with direction" }
     ]
   }
 };
 
-const subjectSelect = document.getElementById("subjectSelect");
-const topicSelect = document.getElementById("topicSelect");
-const container = document.getElementById("questionsContainer");
+// ===== USER SIGN-IN =====
+const usernameInput = document.getElementById("usernameInput");
+const saveUser = document.getElementById("saveUser");
+const welcomeUser = document.getElementById("welcomeUser");
 
-function loadSubjects() {
-  subjectSelect.innerHTML = "";
-  Object.keys(data).forEach(subject => {
-    const opt = document.createElement("option");
-    opt.value = subject;
-    opt.textContent = subject;
-    subjectSelect.appendChild(opt);
-  });
-  loadTopics();
+function initUser() {
+  const stored = localStorage.getItem("rev_user");
+  if (stored) {
+    usernameInput.style.display = "none";
+    saveUser.style.display = "none";
+    welcomeUser.textContent = "👋 " + stored;
+  }
 }
 
-function loadTopics() {
-  topicSelect.innerHTML = "";
+saveUser.onclick = () => {
+  const name = usernameInput.value.trim();
+  if (!name) return;
+  localStorage.setItem("rev_user", name);
+  usernameInput.style.display = "none";
+  saveUser.style.display = "none";
+  welcomeUser.textContent = "👋 " + name;
+};
+
+// ===== SUBJECT / TOPIC =====
+const subjectSelect = document.getElementById("subjectSelect");
+const topicSelect = document.getElementById("topicSelect");
+const questionArea = document.getElementById("questionArea");
+
+function populateSubjects() {
+  subjectSelect.innerHTML = "";
+  Object.keys(data).forEach(sub => {
+    const opt = document.createElement("option");
+    opt.value = sub;
+    opt.textContent = sub;
+    subjectSelect.appendChild(opt);
+  });
+  populateTopics();
+}
+
+function populateTopics() {
   const subject = subjectSelect.value;
+  topicSelect.innerHTML = "";
+
   Object.keys(data[subject]).forEach(topic => {
     const opt = document.createElement("option");
     opt.value = topic;
     opt.textContent = topic;
     topicSelect.appendChild(opt);
   });
-  loadQuestions();
+
+  showQuestions();
 }
 
-function loadQuestions() {
-  container.innerHTML = "";
+function showQuestions() {
   const subject = subjectSelect.value;
   const topic = topicSelect.value;
   const questions = data[subject][topic];
 
-  questions.forEach((item, index) => {
+  questionArea.innerHTML = "";
+
+  questions.forEach((item, i) => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "question-card";
 
-    const q = document.createElement("div");
-    q.className = "question";
-    q.textContent = `${index + 1}. ${item.q}`;
+    card.innerHTML = `
+      <div class="question-number">Question ${i + 1}</div>
+      <div>${item.q}</div>
+      <button class="show-btn">Show Answer</button>
+      <div class="answer">${item.a}</div>
+    `;
 
-    const btn = document.createElement("button");
-    btn.textContent = "Show Answer";
+    const btn = card.querySelector(".show-btn");
+    const ans = card.querySelector(".answer");
 
-    const ans = document.createElement("div");
-    ans.className = "answer";
-    ans.textContent = item.a;
-
-    btn.addEventListener("click", () => {
+    btn.onclick = () => {
       ans.style.display = ans.style.display === "block" ? "none" : "block";
-    });
+    };
 
-    card.appendChild(q);
-    card.appendChild(btn);
-    card.appendChild(ans);
-    container.appendChild(card);
+    questionArea.appendChild(card);
   });
 }
 
-subjectSelect.addEventListener("change", loadTopics);
-topicSelect.addEventListener("change", loadQuestions);
+subjectSelect.addEventListener("change", populateTopics);
+topicSelect.addEventListener("change", showQuestions);
 
-loadSubjects();
+// INIT
+initUser();
+populateSubjects();
