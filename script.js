@@ -12,6 +12,15 @@ const examData = {
                 answer: "Correct Answer: B. 5"
             }
         ]
+        "Factorization":[
+        {
+            
+                question: "1. Solve: 2x + 5 = 15",
+                options: ["A. 3", "B. 5", "C. 10", "D. 7"],
+                answer: "Correct Answer: B. 5"
+        }
+            ]
+            
     },
 
     "Science": {
