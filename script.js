@@ -3,8 +3,7 @@
 // ===============================
 
 const examData = {
-    
-    // ===== SUBJECT 1 =====
+
     "Mathematics": {
         "Algebra": [
             "1. Solve: 2x + 5 = 15",
@@ -18,7 +17,6 @@ const examData = {
         ]
     },
 
-    // ===== SUBJECT 2 =====
     "Science": {
         "Physics": [
             "1. Define Newton's First Law.",
@@ -32,8 +30,6 @@ const examData = {
         ]
     }
 
-    // 👉 ADD MORE SUBJECTS HERE
-
 };
 
 // ===============================
@@ -44,45 +40,67 @@ const subjectSelect = document.getElementById("subjectSelect");
 const topicSelect = document.getElementById("topicSelect");
 const questionsContainer = document.getElementById("questionsContainer");
 
+// Load subjects
 function loadSubjects() {
-    for (let subject in examData) {
-        let option = document.createElement("option");
+    subjectSelect.innerHTML = "";
+
+    Object.keys(examData).forEach((subject, index) => {
+        const option = document.createElement("option");
         option.value = subject;
         option.textContent = subject;
         subjectSelect.appendChild(option);
-    }
+
+        // Automatically select first subject
+        if (index === 0) {
+            subjectSelect.value = subject;
+        }
+    });
+
     loadTopics();
 }
 
+// Load topics
 function loadTopics() {
     topicSelect.innerHTML = "";
-    let selectedSubject = subjectSelect.value;
 
-    for (let topic in examData[selectedSubject]) {
-        let option = document.createElement("option");
+    const selectedSubject = subjectSelect.value;
+    const topics = examData[selectedSubject];
+
+    Object.keys(topics).forEach((topic, index) => {
+        const option = document.createElement("option");
         option.value = topic;
         option.textContent = topic;
         topicSelect.appendChild(option);
-    }
+
+        // Automatically select first topic
+        if (index === 0) {
+            topicSelect.value = topic;
+        }
+    });
+
     loadQuestions();
 }
 
+// Load questions
 function loadQuestions() {
     questionsContainer.innerHTML = "";
-    let subject = subjectSelect.value;
-    let topic = topicSelect.value;
 
-    let questions = examData[subject][topic];
+    const subject = subjectSelect.value;
+    const topic = topicSelect.value;
 
-    questions.forEach(q => {
-        let div = document.createElement("div");
+    const questions = examData[subject][topic];
+
+    questions.forEach(question => {
+        const div = document.createElement("div");
         div.className = "question";
-        div.textContent = q;
+        div.textContent = question;
         questionsContainer.appendChild(div);
     });
 }
 
+// Event listeners
 subjectSelect.addEventListener("change", loadTopics);
 topicSelect.addEventListener("change", loadQuestions);
 
+// Start app
 loadSubjects();
