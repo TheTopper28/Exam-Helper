@@ -1,15 +1,11 @@
 body {
-    border-radius: 10px;
-    border-left: 4px solid #6200ee;
-}
-
 .question-box h3 {
     margin: 0 0 10px 0;
 }
 
 .options {
     display: flex;
-    flex-direction: column; /* ✅ vertical options */
+    flex-direction: column;
     gap: 6px;
 }
 
@@ -41,10 +37,4 @@ button {
 
 button:hover {
     background: #4b00b5;
-}
-
-@media (max-width: 600px) {
-    .container {
-        padding: 15px;
-    }
 }
