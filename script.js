@@ -16,7 +16,12 @@ const data={
     Algebra:[
       {q:"Solve 2x+5=17",a:"x=6"},
       {q:"x^2+5x+6",a:"(x+2)(x+3)"}
+    ],
+  Mensuration:[
+      {q:"Solve 2x+5=17",a:"x=6"},
+      {q:"x^2+5x+6",a:"(x+2)(x+3)"}
     ]
+    
   },
   Science:{
     Physics:[
