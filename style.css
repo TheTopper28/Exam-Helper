@@ -28,9 +28,9 @@ body{
 .app-header h1{
   font-size:2rem;
   letter-spacing:.5px;
-  background: linear-gradient(90deg,#ffffff,#e0f2fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;;
+  color: #f8fafc;
+text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+letter-spacing: 0.3px;
 }
 
 /* USER TOP RIGHT */
