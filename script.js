@@ -1,4 +1,4 @@
-```javascript
+javascript
 // ========================================
 // ✏️ CREATOR SECTION (EDIT QUESTIONS HERE)
 // ========================================
@@ -111,4 +111,4 @@ subjectSelect.addEventListener("change", loadTopics);
 topicSelect.addEventListener("change", loadQuestions);
 
 loadSubjects();
-```
+
