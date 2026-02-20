@@ -12,10 +12,10 @@ document.getElementById("logoutBtn").onclick=()=>{
 
 // ===== DATA =====
 const data={
-  Mathematics:{
-    Algebra:[
-      {q:"Solve 2x+5=17",a:"x=6"},
-      {q:"x^2+5x+6",a:"(x+2)(x+3)"}
+ Computer:{
+    Chapter4:[
+      {q:"What is the fullform of IDE",a:"Integreted Development Environment"},
+      {q:"If a line begins from '//' it is a _______",a:"Comment line"}
     ]
   },
   Science:{
