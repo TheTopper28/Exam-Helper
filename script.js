@@ -1,103 +1,117 @@
-const examData = {
-    "Mathematics": {
-        "Algebra": [
-            {
-                question: "1. Solve: 2x + 5 = 15",
-                options: ["A. 3", "B. 5", "C. 10", "D. 7"],
-                answer: "Correct Answer: B. 5"
-            }
-        ]
-    },
-    "Science": {
-        "Physics": [
-            {
-                question: "1. Unit of Force?",
-                options: ["A. Joule", "B. Newton", "C. Watt", "D. Pascal"],
-                answer: "Correct Answer: B. Newton"
-            }
-        ]
-    }
+// ===== EDIT THIS DATA ONLY =====
+const data = {
+  "Mathematics": {
+    "Algebra": [
+      "Solve: 2x + 5 = 17",
+      "Factorise: x^2 + 5x + 6"
+    ],
+    "Mensuration": [
+      "Find area of circle radius 7 cm"
+    ]
+  },
+
+  "Science": {
+    "Physics": [
+      "Define velocity"
+    ]
+  }
 };
+// ===============================
 
 const subjectSelect = document.getElementById("subjectSelect");
 const topicSelect = document.getElementById("topicSelect");
-const questionsContainer = document.getElementById("questionsContainer");
+const questionArea = document.getElementById("questionArea");
+const scoreEl = document.getElementById("score");
+const totalEl = document.getElementById("total");
+const resetBtn = document.getElementById("resetScore");
 
-function loadSubjects() {
-    subjectSelect.innerHTML = '<option disabled selected>Choose Subject</option>';
+let score = 0;
+let total = 0;
 
-    Object.keys(examData).forEach(subject => {
-        const option = document.createElement("option");
-        option.value = subject;
-        option.textContent = subject;
-        subjectSelect.appendChild(option);
-    });
-
-    topicSelect.innerHTML = '<option disabled selected>Choose Topic</option>';
-    topicSelect.disabled = true;
+function updateScore() {
+  scoreEl.textContent = score;
+  totalEl.textContent = total;
 }
 
-function loadTopics() {
-    const selectedSubject = subjectSelect.value;
-    topicSelect.disabled = false;
-    topicSelect.innerHTML = '<option disabled selected>Choose Topic</option>';
-
-    Object.keys(examData[selectedSubject]).forEach(topic => {
-        const option = document.createElement("option");
-        option.value = topic;
-        option.textContent = topic;
-        topicSelect.appendChild(option);
-    });
-
-    questionsContainer.innerHTML = "";
+function populateSubjects() {
+  subjectSelect.innerHTML = "";
+  Object.keys(data).forEach(subject => {
+    const opt = document.createElement("option");
+    opt.value = subject;
+    opt.textContent = subject;
+    subjectSelect.appendChild(opt);
+  });
+  populateTopics();
 }
 
-function loadQuestions() {
-    questionsContainer.innerHTML = "";
+function populateTopics() {
+  const subject = subjectSelect.value;
+  topicSelect.innerHTML = "";
 
-    const subject = subjectSelect.value;
-    const topic = topicSelect.value;
-    const questions = examData[subject][topic];
+  Object.keys(data[subject]).forEach(topic => {
+    const opt = document.createElement("option");
+    opt.value = topic;
+    opt.textContent = topic;
+    topicSelect.appendChild(opt);
+  });
 
-    questions.forEach(q => {
-        const box = document.createElement("div");
-        box.className = "question-box";
-
-        const questionText = document.createElement("h3");
-        questionText.textContent = q.question;
-        box.appendChild(questionText);
-
-        const optionsDiv = document.createElement("div");
-        optionsDiv.className = "options";
-
-        q.options.forEach(option => {
-            const opt = document.createElement("div");
-            opt.className = "option";
-            opt.textContent = option;
-            optionsDiv.appendChild(opt);
-        });
-
-        box.appendChild(optionsDiv);
-
-        const answerDiv = document.createElement("div");
-        answerDiv.className = "answer";
-        answerDiv.textContent = q.answer;
-        box.appendChild(answerDiv);
-
-        const btn = document.createElement("button");
-        btn.textContent = "Show Answer";
-        btn.onclick = () => {
-            const visible = answerDiv.style.display === "block";
-            answerDiv.style.display = visible ? "none" : "block";
-            btn.textContent = visible ? "Show Answer" : "Hide Answer";
-        };
-
-        box.appendChild(btn);
-        questionsContainer.appendChild(box);
-    });
+  showQuestions();
 }
 
-subjectSelect.addEventListener("change", loadTopics);
-topicSelect.addEventListener("change", loadQuestions);
+function markCorrect(btn) {
+  if (btn.dataset.done) return;
+  score++;
+  total++;
+  btn.dataset.done = true;
+  updateScore();
+}
 
-loadSubjects();
+function markWrong(btn) {
+  if (btn.dataset.done) return;
+  total++;
+  btn.dataset.done = true;
+  updateScore();
+}
+
+function showQuestions() {
+  const subject = subjectSelect.value;
+  const topic = topicSelect.value;
+  const questions = data[subject][topic];
+
+  questionArea.innerHTML = "";
+
+  questions.forEach((q, i) => {
+    const card = document.createElement("div");
+    card.className = "question-card";
+
+    card.innerHTML = `
+      <div class="question-number">Question ${i + 1}</div>
+      <div>${q}</div>
+      <div class="actions">
+        <button class="btn btn-correct">Correct</button>
+        <button class="btn btn-wrong">Wrong</button>
+      </div>
+    `;
+
+    const correctBtn = card.querySelector(".btn-correct");
+    const wrongBtn = card.querySelector(".btn-wrong");
+
+    correctBtn.onclick = () => markCorrect(correctBtn);
+    wrongBtn.onclick = () => markWrong(wrongBtn);
+
+    questionArea.appendChild(card);
+  });
+}
+
+resetBtn.onclick = () => {
+  score = 0;
+  total = 0;
+  updateScore();
+  document.querySelectorAll(".btn").forEach(b => delete b.dataset.done);
+};
+
+subjectSelect.addEventListener("change", populateTopics);
+topicSelect.addEventListener("change", showQuestions);
+
+populateSubjects();
+updateScore();
