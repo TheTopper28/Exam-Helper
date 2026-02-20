@@ -1,114 +1,71 @@
-:root {
-  --panel: #111827;
-  --panel-light: #1f2937;
-  --accent: #3b82f6;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --radius: 14px;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-}
-
 body {
-  background: #020617;
-  color: var(--text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
 }
 
-.app-header {
+header {
   text-align: center;
-  padding: 28px 16px 10px;
-}
-
-.app-header h1 {
-  font-size: 2rem;
-  margin-bottom: 6px;
-}
-
-.app-header p {
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
   padding: 20px;
-  width: 100%;
+  background: linear-gradient(90deg, #6366f1, #06b6d4);
+  color: white;
 }
 
 .controls {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 16px;
-  margin-bottom: 22px;
-}
-
-.select-group {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-label {
-  font-size: 0.85rem;
-  color: var(--muted);
+  justify-content: center;
+  gap: 15px;
+  margin: 20px;
 }
 
 select {
-  background: var(--panel);
-  border: 1px solid #374151;
-  color: var(--text);
-  padding: 10px 12px;
-  border-radius: var(--radius);
-  font-size: 0.95rem;
-  outline: none;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #1e293b;
+  color: white;
 }
 
-select:focus {
-  border-color: var(--accent);
+#questionsContainer {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
 }
 
-.question-area {
-  background: var(--panel);
-  border: 1px solid #374151;
-  border-radius: var(--radius);
-  padding: 18px;
-  min-height: 200px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+.card {
+  background: #1e293b;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  transition: transform 0.2s;
 }
 
-.placeholder {
-  color: var(--muted);
-  text-align: center;
-  margin-top: 60px;
+.card:hover {
+  transform: translateY(-3px);
 }
 
-.question-card {
-  background: var(--panel-light);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  margin-bottom: 12px;
-  border: 1px solid #374151;
+.question {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-.question-number {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-bottom: 4px;
+.answer {
+  display: none;
+  margin-top: 10px;
+  color: #22c55e;
 }
 
-.app-footer {
-  text-align: center;
-  padding: 14px;
-  color: var(--muted);
-  font-size: 0.85rem;
-  margin-top: auto;
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #6366f1;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #4f46e5;
 }
