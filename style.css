@@ -155,29 +155,4 @@ select:focus{
   transform:translateY(-1px);
   box-shadow:0 6px 14px rgba(34,211,238,.35);
 }
-.feedback-box {
-  margin-top: 40px;
-  padding: 20px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-}
 
-.feedback-box textarea {
-  width: 100%;
-  height: 100px;
-  border-radius: 10px;
-  border: none;
-  padding: 10px;
-  resize: none;
-  margin-bottom: 10px;
-}
-
-.feedback-box button {
-  background: linear-gradient(90deg,#f97316,#fb923c);
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-}
