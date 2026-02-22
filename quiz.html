@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz - STEM Hub</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Ultimate</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Quiz Practice</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="formulas.html">Formulas</a>
-      <a href="tracker.html">Tracker</a>
-      <button onclick="toggleTheme()" class="themeBtn">🌓</button>
-    </nav>
-  </header>
+<canvas id="bgCanvas"></canvas>
 
-  <main class="center fade">
-    <div class="card">
-      <h2 id="question"></h2>
-      <div id="options" class="options"></div>
-      <p id="timer">Time: 10</p>
-      <button class="btn" onclick="nextQuestion()">Next</button>
-      <p id="score">Score: 0</p>
-    </div>
-  </main>
+<header>
+<h1>Quiz Challenge</h1>
+<nav>
+<a href="index.html">Home</a>
+<a href="leaderboard.html">Leaderboard</a>
+<button onclick="toggleTheme()" class="themeBtn">🌓</button>
+</nav>
+</header>
 
-  <script src="script.js"></script>
+<main class="center">
+<div class="card">
+<h2 id="level">Level 1</h2>
+<h3 id="question">Loading AI Question...</h3>
+<div id="options"></div>
+<p id="timer">Time: 15</p>
+<p id="score">Score: 0</p>
+<input id="playerName" placeholder="Your Name (for multiplayer)">
+<button class="btn" onclick="nextAIQuestion()">Next AI Question</button>
+</div>
+</main>
+
+<audio id="correct" src="https://assets.mixkit.co/sfx/preview/mixkit-game-success-alert-2039.mp3"></audio>
+<audio id="wrong" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+
+<script src="script.js"></script>
 </body>
 </html>
