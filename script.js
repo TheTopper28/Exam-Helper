@@ -1,80 +1,71 @@
-// redirect if not logged
-const currentUser=localStorage.getItem("rev_current_user");
-if(!currentUser){location.href="login.html";}
-
-// show user
-document.getElementById("userName").textContent="👋 "+currentUser;
-
-document.getElementById("logoutBtn").onclick=()=>{
-  localStorage.removeItem("rev_current_user");
-  location.href="login.html";
-};
-
-// ===== DATA =====
-const data={
- Computer:{
-    Chapter4:[
-      {q:"What is the fullform of IDE",a:"Integreted Development Environment"},
-      {q:"If a line begins from '//' it is a _______",a:"Comment line"},
-      {q:"What are variables?",a:"A variable is a portion of memory used to store values."},
-      {q:"What are constant?",a:"A contant is a sequence of characters that have fixed value."},
-      {q:"Define BODMAS",a:"Brackets Of Division Multiplication Addition and Subtraction."},
-      {q:"Give a example of logical operators",a:" '&&' '||'  '!' "},
-      {q:"What are relational operators",a:"They are operators that show comparison i.e. ==,>=,<= etc."}
-      
-      
-       ]
+const questions = [
+  {
+    q: "Area of circle formula?",
+    o: ["πr²", "2πr", "r²", "πd"],
+    a: 0
   },
-  Science:{
-    Physics:[
-      {q:"QUESTIONS NOT YET UPLODED"}
-    ]
+  {
+    q: "Speed formula?",
+    o: ["d/t", "t/d", "m×a", "v×t"],
+    a: 0
+  },
+  {
+    q: "Pythagoras theorem?",
+    o: ["a²+b²=c²", "a+b=c", "a²-b²=c²", "ab=c"],
+    a: 0
   }
-};
+];
 
-const subjectSelect=document.getElementById("subjectSelect");
-const topicSelect=document.getElementById("topicSelect");
-const questionArea=document.getElementById("questionArea");
+let current = 0;
+let score = 0;
 
-function populateSubjects(){
-  Object.keys(data).forEach(s=>{
-    const o=document.createElement("option");
-    o.value=s;o.textContent=s;
-    subjectSelect.appendChild(o);
-  });
-  populateTopics();
-}
+function loadQuestion() {
+  const q = questions[current];
+  document.getElementById("question").textContent = q.q;
+  const optDiv = document.getElementById("options");
+  optDiv.innerHTML = "";
 
-function populateTopics(){
-  topicSelect.innerHTML="";
-  Object.keys(data[subjectSelect.value]).forEach(t=>{
-    const o=document.createElement("option");
-    o.value=t;o.textContent=t;
-    topicSelect.appendChild(o);
-  });
-  showQuestions();
-}
-
-function showQuestions(){
-  questionArea.innerHTML="";
-  const list=data[subjectSelect.value][topicSelect.value];
-  list.forEach((it,i)=>{
-    const card=document.createElement("div");
-    card.className="question-card";
-    card.innerHTML=`
-      <div>Q${i+1}. ${it.q}</div>
-      <button class="show-btn">Show Answer</button>
-      <div class="answer">${it.a}</div>
-    `;
-    const b=card.querySelector(".show-btn");
-    const a=card.querySelector(".answer");
-    b.onclick=()=>{
-      a.style.display=a.style.display==="block"?"none":"block";
-    };
-    questionArea.appendChild(card);
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.onclick = () => checkAnswer(i);
+    optDiv.appendChild(btn);
   });
 }
 
-subjectSelect.onchange=populateTopics;
-topicSelect.onchange=showQuestions;
-populateSubjects();
+function checkAnswer(i) {
+  if (i === questions[current].a) score++;
+  document.getElementById("score").textContent = "Score: " + score;
+}
+
+function nextQuestion() {
+  current = (current + 1) % questions.length;
+  loadQuestion();
+}
+
+if (document.getElementById("question")) loadQuestion();
+
+function addTopic() {
+  const input = document.getElementById("topic");
+  const text = input.value.trim();
+  if (!text) return;
+
+  const li = document.createElement("li");
+  li.textContent = text;
+  document.getElementById("list").appendChild(li);
+
+  let saved = JSON.parse(localStorage.getItem("topics") || "[]");
+  saved.push(text);
+  localStorage.setItem("topics", JSON.stringify(saved));
+
+  input.value = "";
+}
+
+if (document.getElementById("list")) {
+  let saved = JSON.parse(localStorage.getItem("topics") || "[]");
+  saved.forEach(t => {
+    const li = document.createElement("li");
+    li.textContent = t;
+    document.getElementById("list").appendChild(li);
+  });
+}
