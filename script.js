@@ -153,3 +153,7 @@ function transitionQuestion() {
 subjectSelect.onchange = populateTopics;
 topicSelect.onchange = showQuestions;
 populateSubjects();
+// PWA service worker
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
