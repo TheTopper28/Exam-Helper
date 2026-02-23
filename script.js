@@ -157,3 +157,30 @@ populateSubjects();
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("service-worker.js");
 }
+// Smooth quiz animation trigger
+function animateQuizCard() {
+  const card = document.querySelector(".quiz-card");
+  if (!card) return;
+
+  card.classList.remove("show");
+  void card.offsetWidth; // restart animation
+  card.classList.add("show");
+}
+
+// Observe quiz content changes
+const quizObserver = new MutationObserver(() => {
+  animateQuizCard();
+});
+
+window.addEventListener("load", () => {
+  const card = document.querySelector(".quiz-card");
+  if (!card) return;
+
+  quizObserver.observe(card, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
+
+  animateQuizCard();
+});
