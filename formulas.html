@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulas</title>
+  <link rel="stylesheet" href="formulas.css"/>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="user-display">
+    <button id="backBtn">← Back</button>
+  </div>
+
+  <h1>📐 Formula Sheet</h1>
+  <p>Quick revision formulas</p>
+</header>
+
+<main class="container">
+
+  <section class="formula-group">
+    <h2>📏 Mensuration</h2>
+    <div class="formula-card">Area of Rectangle = l × b</div>
+    <div class="formula-card">Area of Square = a²</div>
+    <div class="formula-card">Area of Circle = πr²</div>
+    <div class="formula-card">Circumference = 2πr</div>
+    <div class="formula-card">Volume of Cube = a³</div>
+  </section>
+
+  <section class="formula-group">
+    <h2>⚡ Physics</h2>
+    <div class="formula-card">Speed = Distance / Time</div>
+    <div class="formula-card">Force = Mass × Acceleration</div>
+    <div class="formula-card">Work = Force × Distance</div>
+    <div class="formula-card">Density = Mass / Volume</div>
+  </section>
+
+  <section class="formula-group">
+    <h2>💰 Maths</h2>
+    <div class="formula-card">Simple Interest = (P×R×T)/100</div>
+    <div class="formula-card">CI = P(1+R/100)<sup>T</sup></div>
+    <div class="formula-card">Percentage = (Value/Total)×100</div>
+    <div class="formula-card">Average = Sum / Count</div>
+  </section>
+
+</main>
+
+<script>
+document.getElementById("backBtn").onclick = () => {
+  location.href = "index.html";
+};
+</script>
+
+</body>
+</html>
