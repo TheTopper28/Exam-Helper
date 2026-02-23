@@ -9,6 +9,10 @@ document.getElementById("logoutBtn").onclick = () => {
   localStorage.removeItem("rev_current_user");
   location.href = "login.html";
 };
+// ===== FORMULAS PAGE =====
+document.getElementById("formulaBtn").onclick = () => {
+  location.href = "formulas.html";
+};
 
 // ===== DATA =====
 const data = {
