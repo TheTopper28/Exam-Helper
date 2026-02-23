@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STEM Hub Ultimate</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Revision Practice</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<canvas id="bgCanvas"></canvas>
 
-<header>
-<h1>🌌 STEM Hub Ultimate</h1>
-<nav>
-<a href="index.html">Home</a>
-<a href="quiz.html">Quiz</a>
-<a href="formulas.html">Formulas</a>
-<a href="tracker.html">Tracker</a>
-<a href="leaderboard.html">Leaderboard</a>
-<a href="login.html">Login</a>
-<button onclick="toggleTheme()" class="themeBtn">🌓</button>
-</nav>
+<header class="app-header">
+  <div class="user-display">
+    <span id="userName"></span>
+    <button id="logoutBtn">Logout</button>
+    <button id="themeToggle">Toggle Theme</button>
+    <button id="formulaBtn">Formulas</button>
+  </div>
+
+  <h1>📘 Revision Practice</h1>
+  <p>Select subject → topic → practice</p>
 </header>
 
-<main class="center fade">
-<div class="card">
-<h2 id="welcome">Welcome</h2>
-<p>Choose your challenge</p>
-<a class="btn" href="quiz.html">Start Quiz</a>
-<a class="btn" href="leaderboard.html">Leaderboard</a>
-<a class="btn" href="tracker.html">Progress</a>
-</div>
+<main class="container">
+  <section class="controls">
+    <div>
+      <label>Subject</label>
+      <select id="subjectSelect"></select>
+    </div>
+    <div>
+      <label>Topic</label>
+      <select id="topicSelect"></select>
+    </div>
+    <div>
+      <button id="quizToggle">Quiz Mode</button>
+    </div>
+  </section>
+
+  <section id="questionArea" class="question-area"></section>
 </main>
 
 <script src="script.js"></script>
+
+<script>
+document.getElementById("formulaBtn").onclick = () => {
+  location.href = "formulas.html";
+};
+</script>
+
 </body>
 </html>
